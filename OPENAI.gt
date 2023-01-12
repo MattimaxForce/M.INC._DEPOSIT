@@ -1,0 +1,17 @@
+from flask_ask import Ask, statement
+import openai
+
+openai.api_key = "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"
+
+app = Flask(__name__)
+ask = Ask(app, '/')
+
+@ask
+.intent('OpenAIIntent')
+def openai_response():
+response = openai.Completion.create(engine="text-davinci-003",
+prompt="What's the weather like today?")
+return statement(response["choices"][0]["text"])
+
+if name == 'main':
+app.run()
